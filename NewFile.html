@@ -1,0 +1,165 @@
+
+
+
+
+	
+
+
+
+
+
+<!doctype html>
+<html lang="ko">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+    
+  
+
+
+<head>
+  <base href="http://sugang.dankook.ac.kr:80/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>단국대학교 수강신청 시스템</title>
+  <link rel="shortcut icon" type="image/x-icon" href="images/layout/favicon.ICO" />
+  <link rel="stylesheet" href="css/widgets/jquery-ui.min.css" />
+  <link rel="stylesheet" href="css/style.min.css" />
+  <script src="js/jquery/jquery-1.11.1.min.js" ></script>
+  <script src="js/placeholder/placeholders.min.js"></script>
+  <script src="js/widgets/jquery-ui.min.js" ></script>
+  <script src="js/common.js"></script>
+  <script src="js/style.min.js"></script>
+</head>
+<script type="text/javascript">
+var errorMessage = "";
+if (errorMessage != "") {
+    alert(errorMessage);
+}
+
+$(document).ready(function() {
+    $("#submit").click(function(e) {
+        e.preventDefault();
+        if($("#id").val() == ''){
+        	alert("아이디를 입력하여 주세요.");
+        	return false;
+        } else if($("#password").val() == ''){
+            alert("비밀번호를 입력하여 주세요.");
+            return false;
+        } else {
+            $("#logonForm").submit();
+        }
+    });
+
+    $("#contents input").keydown(function(e) {
+        if(e.keyCode == 13)
+	{           
+            if($("#id").val() == ''){
+                alert("아이디를 입력하여 주세요.");
+                return false;
+            } else if($("#password").val() == ''){
+                alert("비밀번호를 입력하여 주세요.");
+                return false;
+            } else {
+                $("#logonForm").submit();
+            }
+        }
+    });
+    
+    $("#lang").val("ko").attr("selected", "selected");
+    $("#lang").change(function () {
+        if (this.value != "") {
+            $("#locale").submit();
+        }      
+    });
+    
+    $("#logonForm #id").focus();
+    $("#logonForm #id").keyup(function(e) {
+        if ($(this).val().length == 8) {
+            $("#logonForm #password").focus();
+        }
+    });
+    
+    $("#findId").on("click",function(e){
+    	e.preventDefault();
+    	var url = "findId.do";
+    	var title = "아이디 찾기";/* 아이디 찾기 */
+        window.open(url, title, "width=600, height=400, top=100 ,left=100, resizable=no, scrollbars=yes, status=no");
+     });
+    
+    $("#loginInfo").click(function(e){
+        e.preventDefault();
+        var url = "https://portal.dankook.ac.kr/web/portal/-7?p_p_id=Bbs_WAR_bbsportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_Bbs_WAR_bbsportlet_action=view_message&_Bbs_WAR_bbsportlet_messageId=414590";
+        var title = "불법 S/W 사용 의심자 안내";/* 불법 S/W 사용 의심자 안내 */
+        window.open(url, title, "width=1200, height=1600, top=100 ,left=100, resizable=yes, scrollbars=yes, status=yes");
+     });
+});
+</script>
+<body id="body" class="login">
+  <div class="wrap">
+    <div id="header">
+      <form id="locale" method="get">
+        <div class="util_box">
+          <label for="user_language">Please select a language</label>
+          <select id="lang" name="lang">
+            <option value="ko">한국어</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+      </form>
+    </div>
+
+    <div id="contents">
+      <div class="cont">
+        <div class="login_box">
+          <h1><img src="images/login/txt_login.png" alt="course registration system" /></h1><!-- 0427 h태그변경 -->
+          <!-- 로그인 폼 -->
+          <form id="logonForm" method="post" action="logon.do" data-message="alert">
+            <div class="login_frm">
+              <h2>단국대학교 수강신청시스템 로그인</h2>
+              <ul>
+                <li><input type="text" id="id" name="id" value="32144866" /></li>
+                <li><input type="password" id="password" name="password" value="11qq" /></li>
+              </ul>
+              <a id="submit" href="#"><img src="images/login/btn_login.png" alt="로그인" /></a>
+              <button></button>
+            </div>
+          </form>
+          <!-- //로그인 폼 -->
+
+          <div class="find_frm">
+            <a href="javascript:(0);" id="findId">아이디 찾기</a>
+            <a href="https://webinfo.dankook.ac.kr/member/resetPasswordForm.do?type=dku&returnurl=http://sugangp.dankook.ac.kr/logon.do ">비밀번호 찾기</a>
+          </div>
+
+          <!-- 코멘트 -->
+          <div class="login_txt">
+            <dl><dt>불법 수강신청에 따른 안내</dt><dd>불법 수강신청으로 인하여 타학생에게 피해를 주고 대학 전산망에 악영향을 주는 행위에 대하여 학교당국에서는 강력히 대응 할 것이며 학칙에 의거 엄중 처벌됨을 알려드립니다.</dd><dd><ul class="lst_hyphen"><li><span class="lst_head">-</span>타인의 비밀번호를 도용하여 수강신청하는 행위</li><li><span class="lst_head">-</span>매크로 등 불법 프로그램을 이용하여 수강신청하는 행위<br />(현재 수강신청 프로그램 내 매크로 방지 기능 포함 운영 중)</li><li><span class="lst_head">-</span>기타 불법행위</li></ul></dd>
+            <div style="color:red;font-size:15px;margin-top:15px;text-decoration:underline;cursor:pointer;"><!-- <a id="loginInfo"><strong>※ 수강신청 관련 불법 S/W 사용 의심자 공지 바로가기</strong></a> --></div>
+            <dt>수강신청 안내</dt><dd>최초 비밀번호는 <strong>생년월일(8자리)</strong>이며 웹정보 시스템에서 비밀번호 변경이 가능합니다.</dd><dd>수강신청 프로그램은  <strong>Internet Explorer 9.0 이상</strong>에서 사용하실 수 있습니다.<br /><ul class="lst_hyphen"><li style="color:#FF0000;"><span class="lst_head">-</span><strong> IE 8.0 이하에서는 정상적으로 동작하지 않을 수 있습니다. (최신 버전 권장)</strong></li><li><span class="lst_head">-</span>Chrome, Firefox, Safari 이용 가능(브라우저별 최신 버전으로 업그레이드 권장)</li></ul></dd><dd>웹 수강신청 프로그램 이용 안내를 읽어보시기 바랍니다. </dd><dd><ul class="lst_hyphen"><li><span class="lst_head">-</span>죽전 학부  : 학사팀(수업) 수강신청 담당자 (전화:031-8005-2056)</li><li><span class="lst_head"> </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp교양교과목 관련문의 : (전화:031-8005-2521,2522)</li><li><span class="lst_head">-</span>천안 학부  : 학사팀(수업) 수강신청 담당자 (전화:041-550-1222~1227)</li><li><span class="lst_head"> </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp교양교과목 관련문의 : (전화:041-550-1342,1343)</li></ul></dd></dl>
+          </div>
+          <!-- //코멘트 -->
+        </div>
+      </div>
+    </div>
+    <div id="footer">
+      <div class="addr_box">
+        <p class="addr">죽전캠퍼스 경기도 용인시 수지구 죽전로 152 (우)16890 / 천안캠퍼스 충남 천안시 동남구 단대로 119 (우)31116</p><!-- 죽전캠퍼스 경기도 용인시 수지구 죽전로 152 (우)16890 / 천안캠퍼스 충남 천안시 동남구 단대로 119 (우)31116 -->
+        <p>Copyright(c) 2015 BY DANKOOK UNIVERSITY. All rights reserved. </p><!-- Copyright(c) 2015 BY DANKOOK UNIVERSITY. All rights reserved. -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>
