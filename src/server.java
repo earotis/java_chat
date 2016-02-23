@@ -17,7 +17,7 @@ public class server extends Thread
 	
 	/**
 	 * ~ )@_@)~
-	 * 서버 주석 변경
+	 * 서버 주석 변경22
 	 */
 	public server()
 	{
